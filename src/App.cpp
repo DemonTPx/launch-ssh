@@ -11,7 +11,7 @@ bool App::OnInit() {
 
     wxIcon icon(icon_xpm);
 
-    auto mainFrame = new MainFrame(APP_NAME, wxDefaultPosition, wxDefaultSize);
+    auto mainFrame = new MainFrame(_("SSH launch"), wxDefaultPosition, wxDefaultSize);
     mainFrame->Show(true);
     mainFrame->SetIcon(icon);
 
