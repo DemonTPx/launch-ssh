@@ -191,6 +191,8 @@ void MainFrame::DeleteSelection() {
 
     if (selection < lstHistory->GetCount()) {
         lstHistory->Select(selection);
+    } else if (selection > 0) {
+        lstHistory->Select(selection - 1);
     }
 
     RefreshList();
