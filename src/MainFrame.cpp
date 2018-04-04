@@ -32,7 +32,7 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 END_EVENT_TABLE()
 
 void MainFrame::OnInputText(wxCommandEvent &event) {
-    query = txtInput->GetValue().Lower();
+    query = txtInput->GetValue();
     lstHistory->SetSelection(wxNOT_FOUND);
     RefreshList();
 }
