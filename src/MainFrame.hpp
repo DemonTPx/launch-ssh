@@ -9,7 +9,6 @@
 class MainFrame : public wxFrame {
 public:
     MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
-    ~MainFrame() override;
 private:
     void Initialize();
 
@@ -26,10 +25,14 @@ private:
     void Launch();
     void Launch(const wxString &target);
 
+    void Autocomplete();
+
     void SelectNext();
     void SelectPrevious();
 
     wxVector<wxString> history;
+    wxVector<wxString> matches;
+    wxString query;
 
     wxTextCtrl * txtInput;
     wxListBox * lstHistory;
