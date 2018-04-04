@@ -32,7 +32,7 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 END_EVENT_TABLE()
 
 void MainFrame::OnInputText(wxCommandEvent &event) {
-    query = txtInput->GetValue();
+    query = txtInput->GetValue().Trim();
     lstHistory->SetSelection(wxNOT_FOUND);
     RefreshList();
 }
@@ -117,9 +117,11 @@ void MainFrame::LaunchSelectedItem() {
 }
 
 void MainFrame::Launch() {
-    auto target = txtInput->GetValue();
+    if (query.Len() == 0) {
+        return;
+    }
 
-    Launch(target);
+    Launch(query);
 }
 
 void MainFrame::Launch(const wxString &target) {
@@ -181,9 +183,15 @@ void MainFrame::DeleteSelection() {
         return;
     }
 
+    auto selection = (unsigned int) lstHistory->GetSelection();
+
     history.Remove(lstHistory->GetStringSelection());
     historyFile.Save(history);
-    lstHistory->Delete((unsigned int) lstHistory->GetSelection());
+    lstHistory->Delete(selection);
+
+    if (selection < lstHistory->GetCount()) {
+        lstHistory->Select(selection);
+    }
 
     RefreshList();
 }
