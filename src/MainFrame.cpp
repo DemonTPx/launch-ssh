@@ -145,10 +145,10 @@ void MainFrame::Autocomplete() {
 
     for (auto &target : matches) {
         while ( ! target.StartsWith(longestMatch)) {
-            longestMatch = longestMatch.SubString(0, longestMatch.Length() - 2);
+            longestMatch = longestMatch.Left(longestMatch.Len() - 1);
         }
 
-        if (longestMatch.Length() == query.Length()) {
+        if (longestMatch.Len() == query.Len()) {
             wxBell();
 
             return;
@@ -156,7 +156,7 @@ void MainFrame::Autocomplete() {
     }
 
     txtInput->SetValue(longestMatch);
-    txtInput->SetSelection(longestMatch.Length(), longestMatch.Length());
+    txtInput->SetSelection(longestMatch.Len(), longestMatch.Len());
 }
 
 void MainFrame::SelectNext() {
