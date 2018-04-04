@@ -18,7 +18,7 @@ void MainFrame::Initialize() {
 
     SetSizerAndFit(sizer);
 
-    historyFile.Load(historyFilename, history);
+    historyFile.Load(history);
 
     for (auto &target : history) {
         lstHistory->Append(target);
@@ -133,7 +133,7 @@ void MainFrame::Launch(const wxString &target) {
     if (history.Index(target) == wxNOT_FOUND) {
         history.push_back(target);
         history.Sort();
-        historyFile.Save(historyFilename, history);
+        historyFile.Save(history);
     }
 }
 
@@ -182,7 +182,8 @@ void MainFrame::DeleteSelection() {
     }
 
     history.Remove(lstHistory->GetStringSelection());
-    historyFile.Save(historyFilename, history);
+    historyFile.Save(history);
     lstHistory->Delete((unsigned int) lstHistory->GetSelection());
+
     RefreshList();
 }

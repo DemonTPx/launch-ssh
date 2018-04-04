@@ -1,10 +1,16 @@
 #include "HistoryFile.hpp"
 
-#include <wx/wfstream.h>
-#include <wx/txtstrm.h>
 #include <wx/textfile.h>
+#include <wx/stdpaths.h>
 
-void HistoryFile::Load(const wxString &filename, wxArrayString &history) {
+HistoryFile::HistoryFile() {
+    auto standardPaths = wxStandardPaths::Get();
+
+    // TODO: Windows/mac compatibility
+    filename = standardPaths.GetUserConfigDir().Append("/.config/launch-ssh-history");
+}
+
+void HistoryFile::Load(wxArrayString &history) {
     wxTextFile file(filename);
 
     if ( ! file.Exists()) {
@@ -23,7 +29,7 @@ void HistoryFile::Load(const wxString &filename, wxArrayString &history) {
     file.Close();
 }
 
-void HistoryFile::Save(const wxString &filename, wxArrayString &history) {
+void HistoryFile::Save(wxArrayString &history) {
     wxTextFile file(filename);
 
     if ( ! file.Exists()) {

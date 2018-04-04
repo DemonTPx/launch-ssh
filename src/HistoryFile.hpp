@@ -8,6 +8,11 @@
 
 class HistoryFile {
 public:
-    void Load(const wxString &filename, wxArrayString &history);
-    void Save(const wxString &filename, wxArrayString &history);
+    HistoryFile();
+
+    void Load(wxArrayString &history);
+    void Save(wxArrayString &history);
+
+private:
+    wxString filename;
 };

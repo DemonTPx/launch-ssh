@@ -1,5 +1,7 @@
 #include "App.hpp"
 
+#include "icon.h"
+
 wxIMPLEMENT_APP(App);
 
 bool App::OnInit() {
@@ -7,8 +9,11 @@ bool App::OnInit() {
         return false;
     }
 
+    wxIcon icon(icon_xpm);
+
     auto mainFrame = new MainFrame(APP_NAME, wxDefaultPosition, wxDefaultSize);
     mainFrame->Show(true);
+    mainFrame->SetIcon(icon);
 
     return true;
 }
