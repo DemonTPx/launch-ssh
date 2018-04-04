@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Categories=Utility;
+Comment=A quick SSH launcher
+Exec=/usr/bin/launch_ssh
+GenericName=Launch SSH
+Icon=putty
+Name=Launch SSH
+StartupNotify=false
+Type=Application
+Version=1.0

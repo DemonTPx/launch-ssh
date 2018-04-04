@@ -1,0 +1,8 @@
+Package: launch-ssh
+Version: 0.1
+Maintainer: Bert Hekman <demontpx@gmail.com>
+Homepage: https://github.com/DemonTPx/launch-ssh
+Architecture: amd64
+Depends: libwxgtk3.0-0v5
+Section: utils
+Description: Launch SSH utility
