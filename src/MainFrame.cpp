@@ -18,15 +18,7 @@ void MainFrame::Initialize() {
 
     SetSizerAndFit(sizer);
 
-    // NOTE: history items always lower case? should be when matching!
-    history.push_back(_("demontpx.com"));
-    history.push_back(_("test1"));
-    history.push_back(_("test10"));
-    history.push_back(_("test11"));
-    history.push_back(_("test12"));
-    history.push_back(_("test20"));
-    history.push_back(_("test-acc2"));
-    history.push_back(_("test-acc1"));
+    historyFile.Load(historyFilename, history);
 
     for (auto &target : history) {
         lstHistory->Append(target);
@@ -81,6 +73,10 @@ void MainFrame::OnChar(wxKeyEvent &event) {
         case WXK_NUMPAD_ENTER:
             Launch();
             break;
+        case WXK_DELETE:
+        case WXK_NUMPAD_DELETE:
+            DeleteSelection();
+            break;
         default:
             event.Skip();
     }
@@ -131,7 +127,14 @@ void MainFrame::Launch(const wxString &target) {
     command.Append(target);
 
     wxExecute(command);
+
     Close();
+
+    if (history.Index(target) == wxNOT_FOUND) {
+        history.push_back(target);
+        history.Sort();
+        historyFile.Save(historyFilename, history);
+    }
 }
 
 void MainFrame::Autocomplete() {
@@ -141,7 +144,7 @@ void MainFrame::Autocomplete() {
         return;
     }
 
-    wxString longestMatch = matches.at(0);
+    wxString longestMatch = matches[0];
 
     for (auto &target : matches) {
         while ( ! target.StartsWith(longestMatch)) {
@@ -171,4 +174,15 @@ void MainFrame::SelectPrevious() {
     if (lstHistory->GetSelection() > 0) {
         lstHistory->SetSelection(lstHistory->GetSelection() - 1);
     }
+}
+
+void MainFrame::DeleteSelection() {
+    if (lstHistory->GetSelection() == wxNOT_FOUND) {
+        return;
+    }
+
+    history.Remove(lstHistory->GetStringSelection());
+    historyFile.Save(historyFilename, history);
+    lstHistory->Delete((unsigned int) lstHistory->GetSelection());
+    RefreshList();
 }
