@@ -8,8 +8,6 @@
 
 #include "HistoryFile.hpp"
 
-const wxString historyFilename = _("launch-ssh-history");
-
 class MainFrame : public wxFrame {
 public:
     MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
@@ -31,8 +29,7 @@ private:
 
     void Autocomplete();
 
-    void SelectNext();
-    void SelectPrevious();
+    void SelectDelta(int delta);
 
     void DeleteSelection();
 

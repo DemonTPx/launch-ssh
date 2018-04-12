@@ -1,5 +1,7 @@
 #include "MainFrame.hpp"
 
+#include <algorithm>
+
 MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size):
         wxFrame(nullptr, -1, title, pos, size, wxDEFAULT_FRAME_STYLE ^ (wxMINIMIZE_BOX | wxMAXIMIZE_BOX))
 {
@@ -63,11 +65,31 @@ void MainFrame::OnChar(wxKeyEvent &event) {
             break;
         case WXK_UP:
         case WXK_NUMPAD_UP:
-            SelectPrevious();
+            SelectDelta(-1);
             break;
         case WXK_DOWN:
         case WXK_NUMPAD_DOWN:
-            SelectNext();
+            SelectDelta(1);
+            break;
+        case WXK_PAGEUP:
+        case WXK_NUMPAD_PAGEUP:
+            SelectDelta(-10);
+            break;
+        case WXK_PAGEDOWN:
+        case WXK_NUMPAD_PAGEDOWN:
+            SelectDelta(10);
+            break;
+        case WXK_HOME:
+        case WXK_NUMPAD_HOME:
+            if (lstHistory->GetCount() != 0) {
+                lstHistory->Select(0);
+            }
+            break;
+        case WXK_END:
+        case WXK_NUMPAD_END:
+            if (lstHistory->GetCount() != 0) {
+                lstHistory->Select(lstHistory->GetCount() - 1);
+            }
             break;
         case WXK_RETURN:
         case WXK_NUMPAD_ENTER:
@@ -164,18 +186,14 @@ void MainFrame::Autocomplete() {
     txtInput->SetSelection(longestMatch.Len(), longestMatch.Len());
 }
 
-void MainFrame::SelectNext() {
-    if (lstHistory->GetSelection() == wxNOT_FOUND && lstHistory->GetCount() != 0) {
-        lstHistory->SetSelection(0);
-    } else if (lstHistory->GetSelection() < lstHistory->GetCount() - 1) {
-        lstHistory->SetSelection(lstHistory->GetSelection() + 1);
+void MainFrame::SelectDelta(int delta) {
+    if (lstHistory->GetCount() == 0) {
+        return;
     }
-}
 
-void MainFrame::SelectPrevious() {
-    if (lstHistory->GetSelection() > 0) {
-        lstHistory->SetSelection(lstHistory->GetSelection() - 1);
-    }
+    int newSelection = lstHistory->GetSelection() + delta;
+
+    lstHistory->SetSelection(std::max(0, std::min((int) lstHistory->GetCount() - 1, newSelection)));
 }
 
 void MainFrame::DeleteSelection() {
