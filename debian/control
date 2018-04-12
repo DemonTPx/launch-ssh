@@ -1,5 +1,5 @@
 Package: launch-ssh
-Version: 0.1
+Version: 0.1.1
 Maintainer: Bert Hekman <demontpx@gmail.com>
 Homepage: https://github.com/DemonTPx/launch-ssh
 Architecture: amd64

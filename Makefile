@@ -1,4 +1,4 @@
-VERSION=0.1
+VERSION=0.1.1
 CODENAME=`lsb_release -c | cut -f2`
 
 .PHONY: all clean build-deb

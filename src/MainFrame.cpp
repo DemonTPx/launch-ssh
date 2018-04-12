@@ -139,6 +139,12 @@ void MainFrame::LaunchSelectedItem() {
 }
 
 void MainFrame::Launch() {
+    if (lstHistory->GetSelection() != wxNOT_FOUND) {
+        LaunchSelectedItem();
+
+        return;
+    }
+
     if (query.Len() == 0) {
         return;
     }
