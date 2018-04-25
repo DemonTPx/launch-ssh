@@ -33,6 +33,8 @@ private:
 
     void DeleteSelection();
 
+    static int NaturalCompare(const wxString &a, const wxString &b);
+
     HistoryFile historyFile;
 
     wxArrayString history;

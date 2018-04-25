@@ -1,5 +1,9 @@
 #include "MainFrame.hpp"
 
+extern "C" {
+#include "strnatcmp.h"
+}
+
 #include <algorithm>
 
 MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size):
@@ -162,7 +166,7 @@ void MainFrame::Launch(const wxString &target) {
 
     if (history.Index(target) == wxNOT_FOUND) {
         history.push_back(target);
-        history.Sort();
+        history.Sort(NaturalCompare);
         historyFile.Save(history);
     }
 }
@@ -220,4 +224,8 @@ void MainFrame::DeleteSelection() {
     }
 
     RefreshList();
+}
+
+int MainFrame::NaturalCompare(const wxString &a, const wxString &b) {
+    return strnatcmp(a.c_str(), b.c_str());
 }
