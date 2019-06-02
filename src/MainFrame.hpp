@@ -41,8 +41,8 @@ private:
     wxArrayString matches;
     wxString query;
 
-    wxTextCtrl * txtInput;
-    wxListBox * lstHistory;
+    wxTextCtrl * txtInput = nullptr;
+    wxListBox * lstHistory = nullptr;
 };
 
 enum {

@@ -50,7 +50,7 @@ void MainFrame::OnHistoryDClick(wxCommandEvent &event) {
 void MainFrame::OnChar(wxKeyEvent &event) {
     auto keyCode = event.GetKeyCode();
 
-    if (keyCode == WXK_BACK || keyCode >= WXK_SPACE && keyCode < WXK_START) {
+    if (keyCode == WXK_BACK || (keyCode >= WXK_SPACE && keyCode < WXK_START)) {
         if ( ! txtInput->HasFocus()) {
             long start, end;
             txtInput->GetSelection(&start, &end);

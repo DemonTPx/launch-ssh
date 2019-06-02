@@ -9,11 +9,9 @@ bool App::OnInit() {
         return false;
     }
 
-    wxIcon icon(icon_xpm);
-
     auto mainFrame = new MainFrame(_("Launch SSH"), wxDefaultPosition, wxDefaultSize);
     mainFrame->Show(true);
-    mainFrame->SetIcon(icon);
+    mainFrame->SetIcon(wxIcon(wxICON(icon)));
 
     return true;
 }
