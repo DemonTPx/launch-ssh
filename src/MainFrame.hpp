@@ -41,6 +41,8 @@ private:
     wxArrayString matches;
     wxString query;
 
+    wxString command;
+
     wxTextCtrl * txtInput = nullptr;
     wxListBox * lstHistory = nullptr;
 };

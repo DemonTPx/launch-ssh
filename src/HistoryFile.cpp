@@ -6,8 +6,11 @@
 HistoryFile::HistoryFile() {
     auto standardPaths = wxStandardPaths::Get();
 
-    // TODO: Windows/mac compatibility
+#if defined(__WINDOWS__)
+    filename = standardPaths.GetUserConfigDir().Append("launch-ssh-history");
+#else
     filename = standardPaths.GetUserConfigDir().Append("/.config/launch-ssh-history");
+#endif
 }
 
 void HistoryFile::Load(wxArrayString &history) {

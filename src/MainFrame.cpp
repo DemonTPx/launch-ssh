@@ -13,7 +13,13 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 }
 
 void MainFrame::Initialize() {
-    txtInput = new wxTextCtrl(this, ID_Input, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_DONTWRAP);
+#if defined(__WINDOWS__)
+    command = _("\"C:\\Program Files (x86)\\PuTTY\\putty.exe\" ");
+#else
+    command = _("x-terminal-emulator -e ssh ");
+#endif
+
+    txtInput = new wxTextCtrl(this, ID_Input, wxEmptyString, wxDefaultPosition, wxDefaultSize);
     lstHistory = new wxListBox(this, ID_History);
 
     auto sizer = new wxBoxSizer(wxVERTICAL);
@@ -157,10 +163,7 @@ void MainFrame::Launch() {
 }
 
 void MainFrame::Launch(const wxString &target) {
-    auto command = _("x-terminal-emulator -e ssh ");
-    command.Append(target);
-
-    wxExecute(command);
+    wxExecute(command + target);
 
     Close();
 
