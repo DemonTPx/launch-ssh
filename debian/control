@@ -3,6 +3,6 @@ Version: $VERSION$
 Maintainer: Bert Hekman <demontpx@gmail.com>
 Homepage: https://github.com/DemonTPx/launch-ssh
 Architecture: amd64
-Depends: libwxgtk3.0-0v5
+Depends: libwxgtk3.0-gtk3-0v5 | libwxgtk3.0-0v5
 Section: utils
 Description: Launch SSH utility
