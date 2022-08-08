@@ -24,6 +24,8 @@ Delete records from your history you don't want using the `DELETE` key.
 
 Download and install:
 
+* [launch-ssh_0.1.2-jammy_amd64.deb](https://github.com/DemonTPx/launch-ssh/releases/download/0.1.2/launch-ssh_0.1.2-jammy_amd64.deb)
+* [launch-ssh_0.1.2-focal_amd64.deb](https://github.com/DemonTPx/launch-ssh/releases/download/0.1.2/launch-ssh_0.1.2-focal_amd64.deb)
 * [launch-ssh_0.1.2-bionic_amd64.deb](https://github.com/DemonTPx/launch-ssh/releases/download/0.1.2/launch-ssh_0.1.2-bionic_amd64.deb)
 * [launch-ssh_0.1.2-xenial_amd64.deb](https://github.com/DemonTPx/launch-ssh/releases/download/0.1.2/launch-ssh_0.1.2-xenial_amd64.deb)
 
